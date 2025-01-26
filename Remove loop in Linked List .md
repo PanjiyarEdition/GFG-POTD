@@ -10,7 +10,16 @@ Given the head of a linked list that may contain a loop.  A loop means that the 
 # Java
 ```java []
 
-CODE HERE
+class Solution {
+    public static void removeLoop(Node head) {
+        Node slow = head, fast = head;
+        while (fast != null && fast.next != null && (slow = slow.next) != (fast = fast.next.next));
+        if (fast == null || fast.next == null) return;
+        for (slow = head; slow != fast; slow = slow.next, fast = fast.next);
+        while (fast.next != slow) fast = fast.next;
+        fast.next = null;
+    }
+}
 
 ```
 
@@ -45,7 +54,15 @@ class Solution {
 # Python
 ``` python []
 
-CODE HERE     
+class Solution:
+    def removeLoop(self, head):
+        slow, fast = head, head
+        while fast and fast.next and (slow := slow.next) != (fast := fast.next.next): pass
+        if not fast or not fast.next: return
+        slow = head
+        while slow != fast: slow, fast = slow.next, fast.next
+        while fast.next != slow: fast = fast.next
+        fast.next = None   
 ```
 
 ---
